@@ -3,40 +3,31 @@
 import React, {
   Component,
   StyleSheet,
+  Dimensions,
   Text,
-  View,
-  Animated
+  View
 } from 'react-native';
 
+var {height, width} = Dimensions.get('window');
 
-import Avatar from './common/avatar'
+var sidebarWidth = (width*2)/3;
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
-  }
-
-  getLayout(){
-    return {
-      transform: [
-        {translateX: this.props.pan.x }
-      ]
+    this.state = {
+      toolbarHidden: false
     }
   }
   render(){
-
-    return <Animated.View style={[
-      styles.container,
-      {height: this.props.size.height, width: this.props.size.width, right: this.props.right},
-      this.getLayout()
-      ]}>
+    return <View style={[styles.container, {height: height, width: sidebarWidth, right: (width - sidebarWidth)}]}>
         <View style={styles.primarySection}>
           <Text>sdf</Text>
         </View>
         <View style={styles.actionSection}>
           <Text>sdf</Text>
         </View>
-      </Animated.View>
+      </View>
   }
 }
 
