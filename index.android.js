@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     height:56,
-    backgroundColor: '#E64A19'
+    backgroundColor: '#FF5722'
   },
 });
 
