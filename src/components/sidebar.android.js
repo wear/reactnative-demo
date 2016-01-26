@@ -9,6 +9,10 @@ import React, {
 } from 'react-native';
 
 
+var deviceScreen = require('Dimensions').get('window');
+var width = deviceScreen.width*0.7;
+
+
 import Avatar from './common/avatar'
 
 class Sidebar extends Component {
@@ -16,19 +20,11 @@ class Sidebar extends Component {
     super(props);
   }
 
-  getLayout(){
-    return {
-      transform: [
-        {translateX: this.props.pan.x }
-      ]
-    }
-  }
   render(){
 
     return <Animated.View style={[
       styles.container,
-      {height: this.props.size.height, width: this.props.size.width, right: this.props.right},
-      this.getLayout()
+      {height: deviceScreen.height, width: width}
       ]}>
         <View style={styles.primarySection}>
           <Text>sdf</Text>
