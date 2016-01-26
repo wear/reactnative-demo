@@ -5,6 +5,7 @@ import React, {
   Image,
   Text,
   View,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
@@ -15,29 +16,39 @@ export default class TopicItem extends Component {
   constructor(props) {
     super(props);
   }
+
+  onTopicSelected(item){
+    this.props.navigator.push({
+      name: 'topic',
+      passProps: {topicId: item.id}
+    })
+  }
   render(){
     const {item} = this.props;
 
-    return <View style={styles.card}>
-      <View style={styles.leftIcon}>
-        <Avatar image={<Image source={{uri: item.user.avatar_url }} />} />
+    return <TouchableOpacity
+      onPress={this.onTopicSelected.bind(this, item)} >
+      <View style={styles.card}>
+        <View style={styles.leftIcon}>
+          <Avatar image={<Image source={{uri: item.user.avatar_url }} />} />
+        </View>
+        <View style={{flex:1,justifyContent:'center', paddingTop: 14, paddingBottom: 16}}>
+          <View style={styles.row}>
+            <Text style={styles.captionText}>
+              <Text style={styles.clickableText}>{item.user.name}</Text><Text>发布于</Text><Text style={styles.clickableText}>{item.node_name}</Text>
+            </Text>
+          </View>
+          <View style={styles.primaryTextContainer}>
+            <Text style={styles.primaryText}>{item.title}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.captionText}>
+              <Text>由</Text><Text style={styles.clickableText}>{item.last_reply_user_login}</Text><Text>回复于</Text><Text>{moment(item.replied_at).fromNow()} </Text>
+            </Text>
+          </View>
+        </View>
       </View>
-      <View style={{flex:1,justifyContent:'center', paddingTop: 14, paddingBottom: 16}}>
-        <View style={styles.row}>
-          <Text style={styles.captionText}>
-            <Text style={styles.clickableText}>{item.user.name}</Text><Text>发布于</Text><Text style={styles.clickableText}>{item.node_name}</Text>
-          </Text>
-        </View>
-        <View style={styles.primaryTextContainer}>
-          <Text style={styles.primaryText}>{item.title}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.captionText}>
-            <Text>由</Text><Text style={styles.clickableText}>{item.last_reply_user_login}</Text><Text>回复于</Text><Text>{moment(item.replied_at).fromNow()} </Text>
-          </Text>
-        </View>
-      </View>
-    </View>
+    </ TouchableOpacity>
   }
 }
 
@@ -45,12 +56,13 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 2,
-    margin: 8,
+    marginHorizontal: 8,
+    marginVertical: 4,
     paddingLeft: 16,
     paddingRight: 16,
     borderWidth: 1,
-    borderColor: '#B6B6B6',
     flexDirection: 'row',
+    elevation: 2
   },
   leftIcon: {
     width: 56,

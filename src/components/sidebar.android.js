@@ -9,9 +9,8 @@ import React, {
 } from 'react-native';
 
 
-var deviceScreen = require('Dimensions').get('window');
-var width = deviceScreen.width*0.7;
-
+const deviceScreen = require('Dimensions').get('window');
+const width = deviceScreen.width*0.7;
 
 import Avatar from './common/avatar'
 
@@ -21,8 +20,7 @@ class Sidebar extends Component {
   }
 
   render(){
-
-    return <Animated.View style={[
+    return <View style={[
       styles.container,
       {height: deviceScreen.height, width: width}
       ]}>
@@ -32,7 +30,7 @@ class Sidebar extends Component {
         <View style={styles.actionSection}>
           <Text>sdf</Text>
         </View>
-      </Animated.View>
+      </View>
   }
 }
 
@@ -40,8 +38,9 @@ var styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
-    borderWidth: 1,
-    borderColor: 'blue'
+    borderRightWidth: 1,
+    borderRightColor: '#B6B6B6',
+    elevation: 2
   },
   primarySection: {
     flex: 1,
