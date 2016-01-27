@@ -10,7 +10,13 @@ import React, {
 } from 'react-native';
 
 import Avatar from './common/avatar'
-import moment from 'moment';
+
+var moment = require('moment');
+require('moment/locale/zh-cn');
+moment.locale('zh-cn')
+console.log(moment.locale());
+
+
 
 export default class TopicItem extends Component {
   constructor(props) {
